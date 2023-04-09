@@ -15,12 +15,31 @@
 
 #include <cstddef>
 #include <iostream>
+#include <vector>
 #include "ivs2-mathlib/ivs-math.hpp"
 
 using namespace std;
 
+/**
+ * @brief Function to calculate sample mean for standard deviation
+ *
+ * @param samples Vector of samples
+ */
+double sample_mean(vector<double> samples)
+{
+    double sum = 0;
+    for (double value : samples)
+    {
+        sum = ivsm::add(sum, value);
+    }
+
+    return ivsm::divide(sum, samples.size());
+}
+
 int main() {
-    double res = ivsm::add(2, 3);
-    cout << res << endl;
+    vector<size_t> test = {420, 42, 31, 88};
+
+    cout << sample_mean(test) << endl;
+
     return 0;
 }
