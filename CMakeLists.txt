@@ -17,12 +17,13 @@
 #   make
 ###################################################
 
+# == SETUP ==
 cmake_minimum_required(VERSION 3.16)
 project(ivs2-profiler)
 
+# find math library
 set(CMAKE_PREFIX_PATH "${CMAKE_CURRENT_SOURCE_DIR}/../ivs2-mathlib/install")
 find_package(ivs2-mathlib 0.1 CONFIG REQUIRED)
-
 
 set(CMAKE_CXX_STANDARD 17)
 
@@ -35,3 +36,41 @@ target_sources(${PROJECT_NAME}
 
 target_link_libraries(${PROJECT_NAME} PRIVATE ivsm::ivs2-mathlib)
 
+
+# == TESTING ==
+enable_testing()
+
+add_test(
+    NAME 10_samples 
+    COMMAND sh -c "${CMAKE_CURRENT_SOURCE_DIR}/build/${PROJECT_NAME} < ${CMAKE_CURRENT_SOURCE_DIR}/tst/data10.txt"
+)
+set_tests_properties(10_samples
+    PROPERTIES PASS_REGULAR_EXPRESSION "307604\.4151")
+
+add_test(
+    NAME 1k_samples 
+    COMMAND sh -c "${CMAKE_CURRENT_SOURCE_DIR}/build/${PROJECT_NAME} < ${CMAKE_CURRENT_SOURCE_DIR}/tst/data1k.txt"
+)
+set_tests_properties(1k_samples
+    PROPERTIES PASS_REGULAR_EXPRESSION "290327\.7403")
+
+add_test(
+    NAME 1m_samples 
+    COMMAND sh -c "${CMAKE_CURRENT_SOURCE_DIR}/build/${PROJECT_NAME} < ${CMAKE_CURRENT_SOURCE_DIR}/tst/data1m.txt"
+)
+set_tests_properties(1m_samples
+    PROPERTIES PASS_REGULAR_EXPRESSION "291538\.4336")
+
+add_test(
+    NAME bad_input 
+    COMMAND sh -c "${CMAKE_CURRENT_SOURCE_DIR}/build/${PROJECT_NAME} < ${CMAKE_CURRENT_SOURCE_DIR}/tst/dataBad.txt"
+)
+set_tests_properties(bad_input
+    PROPERTIES WILL_FAIL TRUE)
+
+add_test(
+    NAME short_input 
+    COMMAND sh -c "${CMAKE_CURRENT_SOURCE_DIR}/build/${PROJECT_NAME} < ${CMAKE_CURRENT_SOURCE_DIR}/tst/dataShort.txt"
+)
+set_tests_properties(short_input
+    PROPERTIES WILL_FAIL TRUE)
