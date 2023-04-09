@@ -36,10 +36,41 @@ double sample_mean(vector<double> samples)
     return ivsm::divide(sum, samples.size());
 }
 
+/**
+ * @brief Function to calculate standard deviation from input vector
+ *
+ * @param samples Vector of samples
+ */
+double std_deviation(vector<double> samples)
+{
+    double sm = sample_mean(samples);
+    size_t N = samples.size();
+    
+    // calculate value to subtract from each sample in sum
+    double expSm = ivsm::exponentiate(sm, 2); 
+    double subVal = ivsm::multiply(expSm, N); 
+
+    double sum = 0;
+    double expVal;
+    for (double value : samples)
+    {
+        expVal = ivsm::exponentiate(value, 2);
+        sum = ivsm::add(sum, expVal);
+    }
+
+    double dividend = ivsm::subtract(sum, subVal);
+    double divisor = ivsm::subtract(N, 1);
+    double quotient = ivsm::divide(dividend, divisor);
+
+    double result = ivsm::root(quotient, 2);
+
+    return result;
+}
+
 int main() {
     vector<size_t> test = {420, 42, 31, 88};
 
-    cout << sample_mean(test) << endl;
+    cout << std_deviation(test) << endl;
 
     return 0;
 }
