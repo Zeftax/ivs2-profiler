@@ -15,8 +15,11 @@
 
 #include <cstddef>
 #include <iostream>
+#include <sstream>
 #include <vector>
 #include "ivs2-mathlib/ivs-math.hpp"
+
+#define ERROR -1
 
 using namespace std;
 
@@ -67,10 +70,57 @@ double std_deviation(vector<double> samples)
     return result;
 }
 
-int main() {
-    vector<size_t> test = {420, 42, 31, 88};
+/**
+ * @brief Reads whitespace separated numbers from stdin and parses them
+ *        to vector.
+ * 
+ * @param[out] out Vector to fill with numbers
+ */
+int read_input(vector<double> &out)
+{
+    string input;
+    double value;
+    char charCheck;
+    // read whitespace separated input
+    while(cin >> input)
+    {
+        // convert input string to double
+        stringstream stream(input);
+        stream >> value;
 
-    cout << std_deviation(test) << endl;
+        // check if input contains a char
+        if (stream.fail() || stream.get(charCheck))
+        {
+            stream.clear();
+            return ERROR;
+        }
+
+        out.push_back(value);
+    }
+
+    return 0;
+}
+
+
+int main() 
+{
+    vector<double> samples;
+
+    if (read_input(samples) == ERROR)
+    {
+        cerr << "ERROR: Invalid input" << endl;
+        return 1;
+    }
+
+    if (samples.size() < 2)
+    {
+        cerr << "ERROR: At least 2 values must be provided" << endl;
+        return 1;
+    }
+
+    // print standard deviation with 4 decimal places to stdout
+    cout.precision(4);
+    cout << fixed << std_deviation(samples) << endl;
 
     return 0;
 }
