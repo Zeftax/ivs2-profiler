@@ -40,6 +40,8 @@ target_link_libraries(${PROJECT_NAME} PRIVATE ivsm::ivs2-mathlib)
 set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 include(Install)
 
+set_target_properties(${PROJECT_NAME} PROPERTIES OUTPUT_NAME "stddev")
+
 
 # == TESTING ==
 enable_testing()
