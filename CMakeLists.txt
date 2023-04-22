@@ -19,7 +19,10 @@
 
 # == SETUP ==
 cmake_minimum_required(VERSION 3.16)
-project(ivs2-profiler)
+project("ivs2-profiler"
+        VERSION 0.1.0
+        DESCRIPTION "Profiler for testing the performance of our ivs2-mathlib math library"
+)
 
 # find math library
 set(CMAKE_PREFIX_PATH "${CMAKE_CURRENT_SOURCE_DIR}/../ivs2-mathlib/install")
@@ -39,6 +42,7 @@ target_link_libraries(${PROJECT_NAME} PRIVATE ivsm::ivs2-mathlib)
 
 set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 include(Install)
+include(Package)
 
 set_target_properties(${PROJECT_NAME} PROPERTIES OUTPUT_NAME "stddev")
 
