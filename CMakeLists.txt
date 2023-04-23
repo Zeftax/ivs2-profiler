@@ -20,7 +20,7 @@
 # == SETUP ==
 cmake_minimum_required(VERSION 3.16)
 project("ivs2-profiler"
-        VERSION 0.1.0
+        VERSION 1.0.0
         DESCRIPTION "Profiler for testing the performance of our ivs2-mathlib math library"
 )
 
