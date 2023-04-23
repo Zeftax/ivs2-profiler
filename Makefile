@@ -49,8 +49,7 @@ profile: mathlib
 
 # installs ivs2-mathlib
 mathlib:
-	mkdir -p $(MATHDIR)/$(BUILDDIR) && cd $(MATHDIR)/$(BUILDDIR) &&\
-		cmake .. && cmake --build . --target install
+	cd $(MATHDIR) && make
 
 # profiles the program ("evaluates" performance)
 eval: profile
@@ -83,8 +82,7 @@ clean: mathlib-clean profile-clean
 
 # removes compiled ivs2-mathlib files
 mathlib-clean:
-	rm -R -f $(MATHDIR)/$(BUILDDIR)
-	rm -R -f $(MATHDIR)/install
+	cd $(MATHDIR) && make clean
 
 # removes compiled ivs2-profiler files
 profile-clean:
