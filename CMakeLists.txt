@@ -52,35 +52,35 @@ enable_testing()
 
 add_test(
     NAME 10_samples 
-    COMMAND sh -c "${CMAKE_CURRENT_SOURCE_DIR}/build/${PROJECT_NAME} < ${CMAKE_CURRENT_SOURCE_DIR}/tst/data10.txt"
+    COMMAND sh -c "${CMAKE_CURRENT_SOURCE_DIR}/_build/stddev < ${CMAKE_CURRENT_SOURCE_DIR}/tst/data10.txt"
 )
 set_tests_properties(10_samples
     PROPERTIES PASS_REGULAR_EXPRESSION "307604\.4151")
 
 add_test(
     NAME 1k_samples 
-    COMMAND sh -c "${CMAKE_CURRENT_SOURCE_DIR}/build/${PROJECT_NAME} < ${CMAKE_CURRENT_SOURCE_DIR}/tst/data1k.txt"
+    COMMAND sh -c "${CMAKE_CURRENT_SOURCE_DIR}/_build/stddev < ${CMAKE_CURRENT_SOURCE_DIR}/tst/data1k.txt"
 )
 set_tests_properties(1k_samples
     PROPERTIES PASS_REGULAR_EXPRESSION "290327\.7403")
 
 add_test(
     NAME 1m_samples 
-    COMMAND sh -c "${CMAKE_CURRENT_SOURCE_DIR}/build/${PROJECT_NAME} < ${CMAKE_CURRENT_SOURCE_DIR}/tst/data1m.txt"
+    COMMAND sh -c "${CMAKE_CURRENT_SOURCE_DIR}/_build/stddev < ${CMAKE_CURRENT_SOURCE_DIR}/tst/data1m.txt"
 )
 set_tests_properties(1m_samples
     PROPERTIES PASS_REGULAR_EXPRESSION "291538\.4336")
 
 add_test(
     NAME bad_input 
-    COMMAND sh -c "${CMAKE_CURRENT_SOURCE_DIR}/build/${PROJECT_NAME} < ${CMAKE_CURRENT_SOURCE_DIR}/tst/dataBad.txt"
+    COMMAND sh -c "${CMAKE_CURRENT_SOURCE_DIR}/_build/stddev < ${CMAKE_CURRENT_SOURCE_DIR}/tst/dataBad.txt"
 )
 set_tests_properties(bad_input
     PROPERTIES WILL_FAIL TRUE)
 
 add_test(
     NAME short_input 
-    COMMAND sh -c "${CMAKE_CURRENT_SOURCE_DIR}/build/${PROJECT_NAME} < ${CMAKE_CURRENT_SOURCE_DIR}/tst/dataShort.txt"
+    COMMAND sh -c "${CMAKE_CURRENT_SOURCE_DIR}/_build/stddev < ${CMAKE_CURRENT_SOURCE_DIR}/tst/dataShort.txt"
 )
 set_tests_properties(short_input
     PROPERTIES WILL_FAIL TRUE)
